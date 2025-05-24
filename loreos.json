@@ -1,0 +1,15 @@
+{
+    "epoch": [
+        "prehistory", "stone age", "bronze age", "iron age", "classical era", "medieval era", "early modern era", 
+        "modern era","near future", "future", "far furture", "very distant furture", "inconceivably distant furture"
+    ],
+    "governance": [
+        "none", "Democracy", "Dictatorship","Anarchy","Communist state","Monarchy","Authoritarianism","Oligarchy",
+        "Aristocracy","Federal republic","Presidential system","Constitutional monarchy","Republic",
+        "One-party state","Plutocracy","Theocracy","Electocracy","Parliamentary republic","Socialism",
+        "Absolute monarchy","Autocracy","Confederation","Corporatocracy","Ergatocracy","Fascism"
+    ]
+}
+
+
+
