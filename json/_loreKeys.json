@@ -1,0 +1,46 @@
+{
+    "world": {
+        "epoch": {
+            "maxPicks": "1",
+            "choices": [
+                "prehistory", "stone age", "bronze age", "iron age", "classical era", 
+                "medieval era", "early modern era", "modern era","near future", "future", 
+                "far furture", "very distant furture", "inconceivably distant furture"
+            ]
+        },
+        "economy": {
+            "maxPicks": "1",
+            "choices": [ 
+                "physical","ephemeral","hybrid" 
+            ]
+        }
+    },
+    "continent": {
+        "goverment": {
+            "maxPicks": 1,
+            "choices": [
+                "NONE!", "democracy", "dictatorship","anarchy","communism","monarchy",
+                "authoritarianism","oligarchy","aristocracy","republic","presidency",
+                "plutocracy","theocracy","electocracy","parliament","socialism",
+                "autocracy","confederation","corporatocracy","argatocracy","fascism"
+            ]
+        },
+        "resource": {
+            "maxPicks": 3,
+            "choices": [
+                "vegetation", "animal", "energy", "population", "oil", "gas", "minerals",
+                "agriculture", "water", "wind", "solar"
+            ]
+        },
+        "culture": {
+            "maxPicks": 3,
+            "choices": [
+                "music", "holidays", "food", "theater", "film", "tv", "games", "sports",
+                "social", "tradition"
+            ]
+        }
+    }
+}
+
+
+

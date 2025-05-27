@@ -1,6 +1,6 @@
 let loreData;
 
-fetch("./lore_keys.json").then(
+fetch("./json/_loreKeys.json").then(
     (response) => response.json()
 ).then(
     (json) => {
@@ -14,16 +14,19 @@ function generateLore(data, level){
     const base = {};
 
     for(let cat in data){
-        let numPicks = Math.floor(Math.random() * cat[0])
+        let numPicks = data[cat].maxPicks;
+
         base[cat] = new Set();
 
         // TODO: prevent randomIndex from repeating
-        for(let i = 0; i <= numPicks; i++){
+        for(let i = 0; i < numPicks; i++){
             if(data[cat].length === 0){ break; }
-            if(data[cat].length < numPicks){ numPicks = data[cat.length]; }
 
-            const randomIndex = Math.floor(Math.random() * (data[cat].length));
-            const pick = data[cat][randomIndex];
+            const choices = data[cat].choices;  // TODO: handle when choices are in another document??
+            if(data[cat].length < numPicks){ numPicks = choices.length; }
+
+            const randomIndex = Math.floor(Math.random() * (choices.length));
+            const pick = choices[randomIndex];
             base[cat].add(pick);
         }
     }
@@ -44,7 +47,7 @@ function printLore(base, level){
         }
         b_items = b_items.slice(0, -2); // remove ", "
 
-        printOut += `<p><b>${b.substring(2)}</b>: ${b_items}`;
+        printOut += `<p><b>${b}</b>: ${b_items}`;
     }
     //printOut += `<p><b>${pillar.substring(2)}</b>: ${dat[pillar][randomIndex]}</p>`
     printTo.innerHTML = printOut;
