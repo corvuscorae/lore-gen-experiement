@@ -4,9 +4,13 @@
         "plant", "animal", "cash", "coin"
     ],
     "ephemeral": [
-        "story", "song", "vibes", "smile", "plans", "nothing"
+        "story", "song", "vibes", "smile", "plans", "nothing",
+        "words"
     ],
     "hybrid":[
         "labor", "art", "favor", "promise"
+    ],
+    "none":[
+        "none"
     ]
 }

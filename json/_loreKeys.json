@@ -11,15 +11,19 @@
         "economy": {
             "maxPicks": "1",
             "choices": [ 
-                "physical","ephemeral","hybrid" 
+                 "none", "physical","ephemeral","hybrid"
             ]
         }
     },
     "continent": {
+        "currency": {
+            "maxPicks": 1,
+            "choice_control": "economy"
+        },
         "goverment": {
             "maxPicks": 1,
             "choices": [
-                "NONE!", "democracy", "dictatorship","anarchy","communism","monarchy",
+                "none", "democracy", "dictatorship","anarchy","communism","monarchy",
                 "authoritarianism","oligarchy","aristocracy","republic","presidency",
                 "plutocracy","theocracy","electocracy","parliament","socialism",
                 "autocracy","confederation","corporatocracy","argatocracy","fascism"
