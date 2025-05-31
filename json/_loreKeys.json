@@ -1,5 +1,6 @@
 {
     "world": {
+        "name": {},
         "epoch": {
             "maxPicks": "1",
             "choices": [
@@ -16,6 +17,7 @@
         }
     },
     "continent": {
+        "name": {},
         "currency": {
             "maxPicks": 1,
             "choice_control": "economy"
