@@ -46,12 +46,19 @@ async function genMultipleContinents(loreData, num, from = 0) {
     }
 
     for(let c in continentStats){
-        console.log(continentStats[c])
-        if(continentStats[c].allies.size === 0){
-            getAllies(
-                continentStats[c], 
-                Math.floor(Math.random() * num)
-            );
+        if(continentStats[c].government !== "none"){
+            if(continentStats[c].allies.size === 0){
+                getAllies(
+                    continentStats[c], 
+                    Math.floor(Math.random() * num)
+                );
+            }
+            if(continentStats[c].enemies.size === 0){
+                getEnemies(
+                    continentStats[c], 
+                    Math.floor(Math.random() * num)
+                );
+            }
         }
     }
 
@@ -70,9 +77,31 @@ function getAllies(self, num){
 
     for(let i = 0; i < num; i++){
         let potentialAlly = continentStats[cKeys[randomIndex]]; 
-        if(potentialAlly.ID !== self.ID){
+        if(potentialAlly.government === "none"){ continue; }
+        if( potentialAlly.ID !== self.ID && 
+            !self.enemies.has(potentialAlly.ID) &&
+            !potentialAlly.enemies.has(self.ID)
+        ){
             allies.add(potentialAlly.ID);
             potentialAlly.allies.add(self.ID)           
+        }   
+        randomIndex = Math.floor(Math.random() * cKeys.length);
+    }
+}
+
+function getEnemies(self, num){
+    const enemies = self.enemies;
+    const  cKeys = Object.keys(continentStats);
+    let randomIndex = Math.floor(Math.random() * cKeys.length);
+
+    for(let i = 0; i < num; i++){
+        let potentialEnemy = continentStats[cKeys[randomIndex]]; 
+        if( potentialEnemy.ID !== self.ID &&
+            !self.allies.has(potentialEnemy.ID) &&
+            !potentialEnemy.allies.has(self.ID)
+        ){
+            enemies.add(potentialEnemy.ID);
+            potentialEnemy.enemies.add(self.ID)           
         }   
         randomIndex = Math.floor(Math.random() * cKeys.length);
     }
@@ -83,6 +112,7 @@ async function genContinent(loreData, i){
     continent.name = [`continent ${i+1}`];  // TODO: name continents
     continent.ID = [i+1];
     continent.allies = new Set();
+    continent.enemies = new Set();
 
     return continent;
 }
@@ -164,7 +194,6 @@ async function getChoices(data, cat, self){
 
         attr_choices = loc[`${controller.attribute}`]; 
         for(const c in attr_choices){
-            console.log(c)
             choices = choices.concat(choiceJSON[attr_choices[c]]); 
         }
     }
