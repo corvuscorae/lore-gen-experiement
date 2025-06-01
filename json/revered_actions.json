@@ -1,0 +1,40 @@
+{
+    "music": [
+        "drum", "sing", "hum", "whistle", "jam", "compose", "listen", "sing",
+        "rap", "chant", "serenade", "dance", "write"
+    ], 
+    "holidays": [
+        "gift-give", "gift-receive", "celebrate", "feast", "toast", "decorate",
+        "light", "carol", "pray", "fast", "honor", "observe"
+    ], 
+    "food": [
+        "cook", "bake", "grill", "roast", "fry", "smoke", "preserve", "toast",
+        "eat", "dish", "plate", "serve", "feast", "fast"
+    ], 
+    "theater": [
+        "act", "write", "perform", "improvise", "monologue", "mime", 
+        "soliloquize", "watch"
+    ], 
+    "film": [  
+        "write", "direct", "make",
+        "watch", "rewatch", "attend", "recommend", "discuss", "review"
+    ], 
+    "tv": [
+        "binge", "watch", "rewatch", "recommend", "discuss", "review"
+    ], 
+    "games": [
+        "play", "compete", "coordinate", "grind", "stream", "spectate"
+    ], 
+    "sports": [
+        "play", "compete", "coordinate", "run", "jump", "swim", "dribble",
+        "train", "assist", "support", "cheer", "watch", "celebrate"
+    ],
+    "social": [
+        "talk", "joke", "gossip", "argue", "meet", "hug", "handshake",
+        "greet", "bond", "mingle", "date", "marry", "flirt", "gather"
+    ], 
+    "tradition": [
+        "celebrate", "honor", "commemorate", "observe", "remember",
+        "tribute", "recite", "dress"
+    ]
+}

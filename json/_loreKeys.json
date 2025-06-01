@@ -20,7 +20,11 @@
         "name": {},
         "currency": {
             "maxPicks": 1,
-            "choice_control": "economy"
+            "choice_control": {
+                "location": "world",
+                "attribute":"economy",
+                "json": "economy"
+            }
         },
         "goverment": {
             "maxPicks": 1,
@@ -29,7 +33,15 @@
                 "authoritarianism","oligarchy","aristocracy","republic","presidency",
                 "plutocracy","theocracy","electocracy","parliament","socialism",
                 "autocracy","confederation","corporatocracy","argatocracy","fascism"
-            ]
+            ], 
+            "modifiers": {
+                "values": [
+                    "", "total", "partial", "democratic","anarchist","communist","monarchical",
+                    "authoritarian","oligarchical","aristocratic","republican","presidential",
+                    "plutocratic","theocratic","electocratic","parliamentary","socialist",
+                    "autocratic","corporate","argatocratic","fascist"
+                ]
+            }
         },
         "resource": {
             "maxPicks": 3,
@@ -44,7 +56,28 @@
                 "music", "holidays", "food", "theater", "film", "tv", "games", "sports",
                 "social", "tradition"
             ]
-        }
+        },
+        "revered_actions": {
+            "minPicks": 3,
+            "maxPicks": 6,
+            "choice_control": {
+                "location":"self",
+                "attribute":"culture",
+                "json":"revered_actions"
+            }
+        },
+        "despised_actions": {
+            "minPicks": 1,
+            "maxPicks": 3,
+            "choice_control": {
+                "location":"self",
+                "attribute":"culture",
+                "json":"despised_actions"
+            }
+        },
+        "allies": {},
+        "enemies": {},
+        "economy_strength": {}
     }
 }
 

@@ -1,0 +1,32 @@
+{
+    "music": [
+        "plagiarize"
+    ],
+    "holidays": [
+        "ignore"
+    ],
+    "food": [
+        "burn"
+    ],
+    "theater": [
+        "bootleg"
+    ],
+    "film": [
+        "spoil"
+    ],
+    "tv": [
+        "spoil"
+    ],
+    "games": [
+        "rage-quit", "troll"
+    ],
+    "sports": [
+        "forfeit" 
+    ],
+    "social": [
+        "isolate"
+    ],
+    "tradition": [
+        "neglect", "disregard"
+    ]
+}

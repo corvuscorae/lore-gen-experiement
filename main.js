@@ -43,7 +43,7 @@ async function genMultipleContinents(loreData, num, from = 0) {
         let newContinent = await genContinent(loreData, i);
         continentStats[newContinent.name] = newContinent;
     }
-    console.log(continentStats)
+    // DEBUG: console.log(continentStats)
 }
 
 async function genContinent(loreData, i){
@@ -73,26 +73,20 @@ async function generateLore(data){
     const base = {};
 
     for(let cat in data){
-        let numPicks = data[cat].maxPicks;
+        const maxPicks = data[cat].maxPicks;
+        const minPicks = (data[cat].minPicks) ? data[cat].minPicks : 0;
+        const numPicks = Math.ceil(Math.random() * (maxPicks - minPicks)) + minPicks;
 
         base[cat] = new Set();
+        let choices;
+        if(data[cat].length !== 0){ 
+            choices = await getChoices(data, cat, base);
+        }
+        // TODO: LEFT OFF HERE
+        // debug: why is revered choices not gathering all possible choices (or IS it??)
 
         // TODO: prevent randomIndex from repeating
         for(let i = 0; i < numPicks; i++){
-            if(data[cat].length === 0){ break; }
-
-            let choices = null;
-            if(data[cat].choice_control){
-                // choice_control variable should refer to a worldStats param
-                const choiceJSON = await loadJSON(`${JSON_PATH}/${data[cat].choice_control}.json`);
-                const c = worldStats[`${data[cat].choice_control}`][0]; // assuming only once controller
-
-                if(c){ choices = choiceJSON[c]; }
-            }
-            else if(data[cat].choices){
-                choices = data[cat].choices;  // TODO: handle when choices are in another document??
-            }
-
             if(choices === null){
                 console.error(`ERROR: unable to load choices for {${cat}}`);
                 break;
@@ -101,7 +95,17 @@ async function generateLore(data){
             if(data[cat].length < numPicks){ numPicks = choices.length; }
 
             const randomIndex = Math.floor(Math.random() * (choices.length));
-            const pick = choices[randomIndex];
+            let pick = choices[randomIndex];
+
+            if(pick && pick !== "none" && data[cat].modifiers){
+                let mods = data[cat].modifiers.values;
+                // TODO ADD WEIGHTING CONTROL FOR MODS!!!!!!!! 
+                const randomIndex = Math.floor(Math.random() * (mods.length));
+                const modifier = mods[randomIndex];
+
+                if(modifier.length > 0){ pick = modifier + " " + pick; }
+            }
+
             base[cat].add(pick);
         }
         base[cat] = [...base[cat]]; // convert to array
@@ -109,6 +113,34 @@ async function generateLore(data){
     
     //console.log(base);
     return base;
+}
+
+async function getChoices(data, cat, self){
+    let choices = [];
+    if(data[cat].choice_control){
+        const controller = data[cat].choice_control;
+        const choiceJSON = await loadJSON(`${JSON_PATH}/${controller.json}.json`);
+
+        let loc;
+        let attr_choices;
+        if(controller.location === "world"){ loc = worldStats; }
+        else if(controller.location === "self"){ loc = self; }
+        else {
+            console.error(`Unknown control location: ${controller.location}`)
+            return;
+        }
+
+        attr_choices = loc[`${controller.attribute}`]; 
+        for(const c in attr_choices){
+            console.log(c)
+            choices = choices.concat(choiceJSON[attr_choices[c]]); 
+        }
+    }
+    else if(data[cat].choices){
+        choices = data[cat].choices;  
+    }
+            
+    return choices;
 }
 
 function printLore(base, level){
