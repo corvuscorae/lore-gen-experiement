@@ -18,6 +18,7 @@
     },
     "continent": {
         "name": {},
+        "ID": {},
         "currency": {
             "maxPicks": 1,
             "choice_control": {
@@ -57,25 +58,8 @@
                 "social", "tradition"
             ]
         },
-        "revered_actions": {
-            "minPicks": 3,
-            "maxPicks": 6,
-            "choice_control": {
-                "location":"self",
-                "attribute":"culture",
-                "json":"revered_actions"
-            }
+        "allies": {
         },
-        "despised_actions": {
-            "minPicks": 1,
-            "maxPicks": 3,
-            "choice_control": {
-                "location":"self",
-                "attribute":"culture",
-                "json":"despised_actions"
-            }
-        },
-        "allies": {},
         "enemies": {},
         "economy_strength": {}
     }

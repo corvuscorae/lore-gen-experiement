@@ -41,16 +41,48 @@ async function genMultipleContinents(loreData, num, from = 0) {
 
     for(let i = from; i < num; i++){
         let newContinent = await genContinent(loreData, i);
+
         continentStats[newContinent.name] = newContinent;
     }
+
+    for(let c in continentStats){
+        console.log(continentStats[c])
+        if(continentStats[c].allies.size === 0){
+            getAllies(
+                continentStats[c], 
+                Math.floor(Math.random() * num)
+            );
+        }
+    }
+
+    for(let c in continentStats){
+        printLore(continentStats[c], "continent");
+    }
+
+
     // DEBUG: console.log(continentStats)
+}
+
+function getAllies(self, num){
+    const allies = self.allies;
+    const  cKeys = Object.keys(continentStats);
+    let randomIndex = Math.floor(Math.random() * cKeys.length);
+
+    for(let i = 0; i < num; i++){
+        let potentialAlly = continentStats[cKeys[randomIndex]]; 
+        if(potentialAlly.ID !== self.ID){
+            allies.add(potentialAlly.ID);
+            potentialAlly.allies.add(self.ID)           
+        }   
+        randomIndex = Math.floor(Math.random() * cKeys.length);
+    }
 }
 
 async function genContinent(loreData, i){
     let continent = await generateLore(loreData.continent);
     continent.name = [`continent ${i+1}`];  // TODO: name continents
-
-    printLore(continent, "continent");
+    continent.ID = [i+1];
+    continent.allies = new Set();
 
     return continent;
 }
