@@ -27,7 +27,7 @@
                 "json": "economy"
             }
         },
-        "goverment": {
+        "government": {
             "maxPicks": 1,
             "choices": [
                 "none", "democracy", "dictatorship","anarchy","communism","monarchy",

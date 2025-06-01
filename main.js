@@ -41,20 +41,21 @@ async function genMultipleContinents(loreData, num, from = 0) {
 
     for(let i = from; i < num; i++){
         let newContinent = await genContinent(loreData, i);
-
         continentStats[newContinent.name] = newContinent;
     }
 
+    // make relationships between continents
+    // TODO: implement smarter relationship generation (maybe based on governments/ideology)
     for(let c in continentStats){
-        if(continentStats[c].government !== "none"){
+        if(continentStats[c].government[0] !== "none"){
             if(continentStats[c].allies.size === 0){
-                getAllies(
+                getRandomAllies(
                     continentStats[c], 
                     Math.floor(Math.random() * num)
                 );
             }
             if(continentStats[c].enemies.size === 0){
-                getEnemies(
+                getRandomEnemies(
                     continentStats[c], 
                     Math.floor(Math.random() * num)
                 );
@@ -66,19 +67,18 @@ async function genMultipleContinents(loreData, num, from = 0) {
         printLore(continentStats[c], "continent");
     }
 
-
     // DEBUG: console.log(continentStats)
 }
 
-function getAllies(self, num){
+function getRandomAllies(self, num){
     const allies = self.allies;
     const  cKeys = Object.keys(continentStats);
     let randomIndex = Math.floor(Math.random() * cKeys.length);
 
     for(let i = 0; i < num; i++){
         let potentialAlly = continentStats[cKeys[randomIndex]]; 
-        if(potentialAlly.government === "none"){ continue; }
         if( potentialAlly.ID !== self.ID && 
+            potentialAlly.government[0] !== "none" &&
             !self.enemies.has(potentialAlly.ID) &&
             !potentialAlly.enemies.has(self.ID)
         ){
@@ -89,7 +89,7 @@ function getAllies(self, num){
     }
 }
 
-function getEnemies(self, num){
+function getRandomEnemies(self, num){
     const enemies = self.enemies;
     const  cKeys = Object.keys(continentStats);
     let randomIndex = Math.floor(Math.random() * cKeys.length);
@@ -97,6 +97,7 @@ function getEnemies(self, num){
     for(let i = 0; i < num; i++){
         let potentialEnemy = continentStats[cKeys[randomIndex]]; 
         if( potentialEnemy.ID !== self.ID &&
+            potentialEnemy.government[0] !== "none" &&
             !self.allies.has(potentialEnemy.ID) &&
             !potentialEnemy.allies.has(self.ID)
         ){
